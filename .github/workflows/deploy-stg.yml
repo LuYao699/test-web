@@ -1,0 +1,20 @@
+name: Deploy to Staging
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Deploy
+        uses: ./.github/actions/deploy
+        env:
+          PROJECT_ID: test-4a534
+          HOSTING_SITE: test-4a534-3627b
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}

@@ -1,0 +1,20 @@
+name: Deploy
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Firebase CLI
+      shell: bash
+      run: npm install -g firebase-tools
+    - name: Deploy to Firebase
+      shell: bash
+      env:
+        PROJECT_ID: ${{ env.PROJECT_ID }}
+        HOSTING_SITE: ${{ env.HOSTING_SITE }}
+        FIREBASE_SERVICE_ACCOUNT_JSON: ${{ env.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      run: |
+        echo "$FIREBASE_SERVICE_ACCOUNT_JSON" > gcp-credentials.json
+        export GOOGLE_APPLICATION_CREDENTIALS="gcp-credentials.json"
+        firebase projects:list
+        firebase use $PROJECT_ID
+        firebase deploy --only hosting:${HOSTING_SITE}
