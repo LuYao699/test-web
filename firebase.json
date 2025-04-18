@@ -1,11 +1,17 @@
 {
   "hosting": {
     "site": "test-4a534-3627b",
-    "public": "build/client",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "ssr"
+      }
     ]
   }
 }
