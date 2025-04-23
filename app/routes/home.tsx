@@ -10,6 +10,7 @@ export default function Home() {
     <div>
       <h1>Welcome to React App</h1>
       <p>This is a page without index.html</p>
+      <p>sadhjgsjd</p>
     </div>
   );
 }
